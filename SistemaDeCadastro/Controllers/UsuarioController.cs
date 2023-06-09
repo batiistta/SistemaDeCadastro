@@ -95,7 +95,7 @@ namespace SistemaDeCadastro.Controllers
                         {
                             Id = usuarioSemSenha.Id,
                             Nome = usuarioSemSenha.Nome,
-                            Email = usuarioSemSenha.Email,                            
+                            Email = usuarioSemSenha.Email,
                             Perfil = usuarioSemSenha.Perfil
                         };
 
@@ -108,7 +108,7 @@ namespace SistemaDeCadastro.Controllers
                     {
                         Id = usuarioSemSenha.Id,
                         Nome = usuarioSemSenha.Nome,
-                        Email = usuarioSemSenha.Email,                        
+                        Email = usuarioSemSenha.Email,
                         Perfil = usuarioSemSenha.Perfil
                     };
 

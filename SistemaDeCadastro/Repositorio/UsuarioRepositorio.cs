@@ -45,7 +45,7 @@ namespace SistemaDeCadastro.Repositorio
             Usuario usuarioDB = ListarID(usuario.Id);
             if (usuarioDB == null) throw new System.Exception("Erro na atualização do usuário");
             usuarioDB.Nome = usuario.Nome;
-            usuarioDB.Email = usuario.Email;            
+            usuarioDB.Email = usuario.Email;
             usuarioDB.Perfil = usuario.Perfil;
             usuarioDB.DataAtualizacao = DateTime.Now;
 
