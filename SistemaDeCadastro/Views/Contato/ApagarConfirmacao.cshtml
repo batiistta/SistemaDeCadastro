@@ -1,0 +1,41 @@
+@model Contato
+
+@{
+    ViewData["Title"] = "Confirmacao apagar o Contato";
+}
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+            <!-- <h5 class="modal-title">Modal title</h5> -->
+            <h2 class="fw-bold mb-0">Apagar</h2>
+        </div>
+
+        <div class="modal-body p-5 pt-0">
+            <form asp-action="Apagar">
+                <input type="hidden" asp-for="Id" />
+                <div class="modal-body p-5 pt-0">
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Nome" class="form-control rounded-3" id="disabledInput"
+                            placeholder="Nome Completo" disabled="">
+                        <label for="floatingInput">Nome</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" asp-for="Email" class="form-control rounded-3" id="disabledInput"
+                            placeholder="name@example.com" disabled="">
+                        <label for="floatingInput">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" asp-for="Celular" class="form-control rounded-3" id="disabledInput"
+                            placeholder="(00)00000-0000" size="20" maxlength="15" disabled="">
+                        <label for="floatingInput">Telefone</label>
+                    </div>
+
+
+                    <input type="submit" value="Apagar" class="w-100 mb-2 btn btn-lg rounded-3 btn-danger"></a>
+                    <a role="button" class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" asp-action="Index">Cancelar exclusão</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@model SistemaDeCadastro.Models.Usuario
+
+
+	<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+        <div class="container-fluid">           
+
+            <ul class="navbar-nav ml-auto topnav">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
+            </ul>
+            <ul class="navbar-nav ml-auto topnav">
+                @if (Model.Perfil == SistemaDeCadastro.Enums.PerfilEnum.Admin)
+                {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Contato"  asp-action="Index">Todos Contatos</a>
+                </li>   
+                }
+                @if (Model.Perfil == SistemaDeCadastro.Enums.PerfilEnum.Padrao)
+                {             
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Contato"  asp-action="Index">Meus Contatos</a>
+                </li> 
+                }              
+                @if (Model.Perfil == SistemaDeCadastro.Enums.PerfilEnum.Admin)
+                {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a>
+                </li>
+                }                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Usuario"  asp-action="Perfil">Perfil</a>
+                </li>                               
+                <li class="nav-item">
+                    <a class="btn btn-danger rounded-3 text-white" type="button" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
+                </li>
+            </ul>
+        </div>              
+
+    </nav>

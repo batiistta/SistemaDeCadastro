@@ -1,0 +1,68 @@
+@model List<Usuario>
+@{
+    ViewData["Title"] = "Listagem de Usuários";
+}
+
+<div class="text-center">
+
+    
+    <br>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+    
+    <h1 class="display-4">Listagem de usuário</h1>
+
+    <table id="table-usuarios" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Perfil</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data de Cadastro</th>
+                <th scope="col"></th>                
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (Usuario usuario in Model)
+                {
+                    <tr>
+                        <th scope="row">@usuario.Id</th>
+                        <td>@usuario.Nome</td>
+                        <td>@(usuario.Perfil == SistemaDeCadastro.Enums.PerfilEnum.Admin ? "Administrador" : "Padrão")</td>
+                        <td>@usuario.Email</td>
+                        <td>@usuario.DataCadastro</td>                        
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-action="Editar" asp-controller="Usuario" asp-route-id="@usuario.Id" 
+                            >Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@usuario.Id" asp-controller="Usuario"
+                            asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum usuário encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

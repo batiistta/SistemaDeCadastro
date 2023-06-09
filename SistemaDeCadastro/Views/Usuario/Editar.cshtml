@@ -1,0 +1,56 @@
+@using SistemaDeCadastro.Enums
+@model SistemaDeCadastro.Models.Usuario
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+            <!-- <h5 class="modal-title">Modal title</h5> -->
+            <h2 class="fw-bold mb-0">Editar Perfil</h2>
+        </div>
+
+
+        <div class="modal-body p-5 pt-0">
+            <form asp-controller="Usuario" asp-action="Editar" method="post">
+
+                <input type="hidden" asp-for="Id"/>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="Nome" class="form-control rounded-3"
+                        id="floatingInputNome" placeholder="Nome Completo">
+                    <label for="floatingInputNome">Nome</label>
+                    @Html.ValidationMessageFor(x => x.Nome)
+                </div>
+
+                <div class="form-floating mb-3">                                   
+                    <select asp-for="Perfil" id="floatingSelect" class="form-select rounded-3">
+                        <option value="">Selecione</option>
+                        <option value="@PerfilEnum.Admin">Administrador</option>
+                        <option value="@PerfilEnum.Padrao">Padrão</option>
+                    </select>               
+                    <label for="floatingSelect">Perfil</label>
+                    @Html.ValidationMessageFor(x => x.Perfil)
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" autocomplete="off" asp-for="Email" class="form-control rounded-3"
+                        id="floatingInputEmail" placeholder="name@example.com">
+                    <label for="floatingInputEmail">Email</label>
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>                
+
+                <div class="form-floating mb-3">
+                    <input type="email" autocomplete="off" asp-for="ConfirmeEmail" class="form-control rounded-3"
+                        id="floatingInputConfirmeEmail" placeholder="name@example.com">
+                    <label for="floatingInputConfirmeEmail">Confirme o email</label>
+                    @Html.ValidationMessageFor(x => x.ConfirmeEmail)
+                </div>                
+                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Editar</button>
+                <a class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" asp-controller="Usuario" asp-action="Perfil"
+                    role="button">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
