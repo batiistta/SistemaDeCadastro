@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Página Restrita Para Adm";
+}
+
+
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-3 shadow">
+      <div class="modal-body p-4 text-center">
+        <h5 class="mb-0">Selecione a opção desejada?</h5>
+        <p class="mb-0">Somente usuários com acesso padrão do sistema podem criar contatos.</p>
+      </div>      
+        <a role="button"  asp-controller="Home" asp-action="Index" class="btn btn-lg w-100 col-6 mb-2 m-0 rounded-3 btn-secondary border-end"><strong>Voltar</strong></a>
+        <a role="button"  asp-controller="Login" asp-action="Sair" class="btn btn-lg w-100 col-6 mb-2 m-0 rounded-3 btn-danger border-end">Sair</a>
+      
+    </div>
+  </div>
+

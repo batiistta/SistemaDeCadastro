@@ -1,0 +1,45 @@
+@model Login
+@{
+    Layout = "_LayoutDeslogado";
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert"
+        aria-label="Close">X</button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+            <!-- <h5 class="modal-title">Modal title</h5> -->
+            <h2 class="fw-bold mb-0">Login</h2>
+        </div>
+
+
+        <div class="modal-body p-5 pt-0">
+            <form asp-controller="Login" asp-action="Entrar" method="post">
+
+                <div class="form-floating mb-3">
+                    <input type="email" autocomplete="off" asp-for="Email" class="form-control rounded-3"
+                        id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email</label>
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" autocomplete="off" asp-for="Senha" class="form-control rounded-3"
+                        id="floatingInput" placeholder="Senha" size="20" maxlength="20" minlength="8">
+                    <label for="floatingInput">Senha</label>
+                    @Html.ValidationMessageFor(x => x.Senha)
+                </div>
+                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Fazer Login</button>
+                <a role="button" class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" asp-controller="Usuario" asp-action="Criar">Cadastrar-se</a>
+            </form>
+        </div>
+    </div>
+</div>

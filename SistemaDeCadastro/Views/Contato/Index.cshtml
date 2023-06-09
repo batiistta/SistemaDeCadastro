@@ -1,0 +1,136 @@
+@model IEnumerable<Contato>
+@{
+    ViewData["Title"] = "Listagem de Contatos";
+
+    Paginacao paginacao = new Paginacao();
+
+    int pageNo = 0;
+
+    if(ViewBag.Paginacao != null)
+    {
+        paginacao = ViewBag.Paginacao;
+        pageNo = paginacao.CurrentPage;
+    }
+}
+
+
+
+<div class="text-center">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a class="btn btn-primary btn-rounded" role="button" asp-controller="Contato"
+            asp-action="VerificarPerfil">Adicionar novo contato</a>
+    </div>
+    <br>
+    
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert"
+                aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert"
+                aria-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <h1 class="display-4">Listagem de contatos</h1>
+    
+    <div class="row">
+        
+        
+        @if (Model != null && Model.Any())
+        {
+            
+            foreach (Contato contato in Model)
+            {
+
+                <div class="col-lg-3">
+                    <div class="text-center card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <div class="thumb-lg member-thumb mx-auto"><img
+                                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                                    class="rounded-circle img-thumbnail" alt="profile-image">
+                            </div>
+
+                            <div class="">
+                                <h4>@contato.Nome</h4>
+                                <p class="text-muted"><span><a class="text-pink">@contato.Email</a></span></p>
+                                <p class="text-muted"><span><a class="text-pink">@contato.Celular</a></span></p>                                
+                            </div>
+
+                            <ul class="social-links list-inline">
+                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip"
+                                        class="tooltips" href="" data-original-title="Facebook"><i
+                                            class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip"
+                                        class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip"
+                                        class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <a class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" asp-route-id="@contato.Id"
+                    asp-controller="Contato" asp-action="Editar">Editar</a>
+                        <a class="btn btn-danger  mt-3 btn-rounded waves-effect w-md waves-light" asp-route-id="@contato.Id"
+                    asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
+
+                    </div>
+                </div>                
+            }            
+        }
+        else
+        {
+            <p class="text-muted">Não há contatos cadastrados.</p>
+        } 
+            
+    </div>
+</div>
+
+<div class="container">
+    @if (paginacao.TotalPages > 0)  
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (paginacao.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Contato" asp-action="Index" asp-route-pg="1">Início</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Contato" asp-action="Index" asp-route-pg="@(paginacao.CurrentPage-1)">Anterior</a>
+                </li>
+            }
+
+
+            @for (var pge = paginacao.StartPage; pge <= paginacao.EndPage; pge++)
+            {
+                <li class="page-item @(pge == paginacao.CurrentPage ? "active" : "" )">
+                    <a class="page-link" asp-controller="Contato" asp-action="Index" asp-route-pg="@pge"> @pge</a>
+                </li>
+            }  
+            
+            @if (paginacao.CurrentPage < paginacao.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Contato" asp-action="Index" asp-route-pg="@(paginacao.CurrentPage+1)">Próximo</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Contato" asp-action="Index" asp-route-pg="@(paginacao.TotalPages)">Último</a>
+                </li>
+            }
+        </ul>
+    }
+
+
+</div>
+
